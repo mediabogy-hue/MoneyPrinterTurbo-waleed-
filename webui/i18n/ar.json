@@ -587,6 +587,8 @@
     "Video Aspect Ratio": "مقاس الفيديو",
     "Portrait 9:16": "رأسي 9:16",
     "Video Duration": "مدة الفيديو",
-    "Video Language": "لغة الفيديو"
+    "Video Language": "لغة الفيديو",
+    "Egyptian Shorts Preset": "🇪🇬 فيديو مصري سريع 9:16",
+    "Egyptian Shorts Preset Help": "يفعّل تلقائيًا اللهجة المصرية، الفيديو الرأسي 9:16، كابشن كلمة بكلمة وحركة مناسبة للفيديوهات القصيرة."
   }
 }
