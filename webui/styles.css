@@ -484,3 +484,56 @@ div[class*="st-key-task_row_"] button[kind="secondary"] p {
         min-width: 1.75rem !important;
     }
 }
+
+
+/* W Video Studio: mobile-first creator layout */
+@media (max-width: 700px) {
+    div[data-testid="stMainBlockContainer"] {
+        padding-left: 0.75rem !important;
+        padding-right: 0.75rem !important;
+        padding-bottom: 5rem !important;
+    }
+
+    /* Stack Streamlit columns so controls remain readable on phones. */
+    div[data-testid="stHorizontalBlock"] {
+        flex-direction: column !important;
+        gap: 0.65rem !important;
+    }
+
+    div[data-testid="stHorizontalBlock"] > div[data-testid="stColumn"] {
+        width: 100% !important;
+        flex: 1 1 100% !important;
+        min-width: 0 !important;
+    }
+
+    textarea {
+        font-size: 16px !important;
+        min-height: 96px !important;
+    }
+
+    div[data-testid="stButton"] button,
+    div[data-testid="stDownloadButton"] button,
+    button[kind="primary"] {
+        width: 100% !important;
+        min-height: 48px !important;
+        border-radius: 12px !important;
+        font-size: 1rem !important;
+        font-weight: 700 !important;
+    }
+
+    div[data-testid="stSelectbox"],
+    div[data-testid="stNumberInput"],
+    div[data-testid="stTextInput"] {
+        width: 100% !important;
+    }
+
+    div[class*="st-key-voice_mode_control"] [role="radiogroup"] {
+        overflow-x: auto !important;
+    }
+}
+
+/* Better RTL flow when Arabic is selected by the browser/page. */
+html[lang^="ar"] body,
+[dir="rtl"] {
+    direction: rtl;
+}
