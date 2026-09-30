@@ -7011,19 +7011,24 @@ def _render_audio_settings(panel, params):
             elif selected_tts_server == "voxcpm":
                 filtered_voices = voice.get_voxcpm_voices()
             else:
-                # 获取Azure的声音列表
+                # Azure/Edge voices. Arabic UI prioritizes Egyptian Arabic.
                 all_voices = voice.get_all_azure_voices(filter_locals=None)
 
-                # 根据选择的TTS服务器筛选声音
                 for v in all_voices:
                     if selected_tts_server == "azure-tts-v2":
-                        # V2版本的声音名称中包含"v2"
                         if "V2" in v:
                             filtered_voices.append(v)
                     else:
-                        # V1版本的声音名称中不包含"v2"
                         if "V2" not in v:
                             filtered_voices.append(v)
+
+                if (
+                    selected_tts_server == "azure-tts-v1"
+                    and st.session_state.get("ui_language", "").lower().startswith("ar")
+                ):
+                    egyptian = [v for v in filtered_voices if "ar-EG-" in v]
+                    if egyptian:
+                        filtered_voices = egyptian
 
             def _friendly(v):
                 if voice.is_no_voice(v):
@@ -7071,6 +7076,18 @@ def _render_audio_settings(panel, params):
                 )
 
             saved_voice_name_index = 0
+
+            # Arabic UI defaults to Shakir (Egyptian male); Salma remains selectable.
+            if (
+                selected_tts_server == "azure-tts-v1"
+                and st.session_state.get("ui_language", "").lower().startswith("ar")
+                and saved_voice_name not in friendly_names
+            ):
+                egyptian_male = next(
+                    (v for v in filtered_voices if "ar-EG-ShakirNeural" in v), None
+                )
+                if egyptian_male in friendly_names:
+                    saved_voice_name = egyptian_male
 
             # 检查保存的声音是否在当前筛选的声音列表中
             if saved_voice_name in friendly_names:
