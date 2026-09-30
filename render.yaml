@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: w-video-studio
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    branch: waleed-upgrade
+    plan: starter
+    healthCheckPath: /
+    envVars:
+      - key: PORT
+        value: 8501
+      - key: PYTHONUNBUFFERED
+        value: "1"
+    disk:
+      name: w-video-storage
+      mountPath: /MoneyPrinterTurbo/storage
+      sizeGB: 10
