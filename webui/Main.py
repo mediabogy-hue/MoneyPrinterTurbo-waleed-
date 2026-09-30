@@ -5002,6 +5002,26 @@ def _render_script_settings(panel, params):
                     label_visibility="collapsed",
                 ).strip()
 
+            # One-tap Egyptian Shorts preset: mobile-first defaults for Arabic creators.
+            egyptian_short = st.toggle(
+                tr("Egyptian Shorts Preset"),
+                value=st.session_state.get("egyptian_shorts_preset", True),
+                key="egyptian_shorts_preset",
+                help=tr("Egyptian Shorts Preset Help"),
+            )
+            if egyptian_short:
+                params.video_language = "ar"
+                params.video_aspect = VideoAspect.portrait.value
+                params.voice_rate = 1.0
+                params.subtitle_enabled = True
+                params.subtitle_display_mode = "word_by_word"
+                params.subtitle_animation = "pop_spring"
+                params.video_script_prompt = (
+                    "اكتب باللهجة المصرية الطبيعية لفيديو قصير رأسي. "
+                    "ابدأ بهوك قوي جدًا من أول جملة، استخدم جمل قصيرة وسهلة في النطق، "
+                    "ومن غير فصحى متكلفة أو لهجة خليجية. خليه مناسب لـ TikTok وReels وShorts."
+                )
+
             video_languages = [
                 (tr("Auto Detect"), ""),
             ]
